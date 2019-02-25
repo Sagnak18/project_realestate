@@ -17,14 +17,14 @@ postgres_key = pd.read_csv(dir_loc +'postgres_conn_cred.txt').to_dict(orient='re
 ## Database Credentials 
 
 
-from sqlalchemy import MetaData , create_engine
+from sqlalchemy import Table, Column, Integer, Numeric, String, DateTime, ForeignKey, MetaData, create_engine
+from sqlalchemy.orm import relationship, backref, sessionmaker
 from sqlalchemy.engine.url import URL
-from sqlalchemy.orm import sessionmaker
-
+from sqlalchemy.ext.declarative import declarative_base
 ## Establishes a DBAPI connection.
 db_connect_str = URL(**postgres_key)
 engine =create_engine(db_connect_str)
-
+Base = declarative_base()
 
 
 
@@ -34,7 +34,7 @@ engine =create_engine(db_connect_str)
 
 from datetime import datetime
 from sqlalchemy import DateTime
-Base = declarative_base()
+
 
 class Houses(Base):
     __tablename__= 'table_houses'
@@ -114,8 +114,6 @@ class Location(Base):
     postal_code = Column(String(9), index=True) # 1                                            
     city = Column(String(50))
     state = Column(String(2))
-               
-
 
 ### Persisting the database
     
