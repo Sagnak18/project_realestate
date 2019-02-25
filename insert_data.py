@@ -37,7 +37,6 @@ last_key = list(spider.jobs.iter_last())[0]['key']
 ### Project ID/Spider ID/Job ID
 job = client.get_job(last_key)
 
-
 # =============================================================================
 # SQL Alchemy Connection to the database   
 # =============================================================================
